@@ -1,0 +1,5 @@
+// navbar 底線顏色 ＄primary-500, 1px, solid
+.navbar {
+    color: $secondary-700;
+    border-bottom: 1px solid rgba($color: $primary-500, $alpha: 1);
+}

@@ -736,7 +736,7 @@ $line-height-p: 1.5;
 $headings-margin-bottom:      0;//$spacer * .5 !default;
 $headings-font-family:        null !default;
 $headings-font-style:         null !default;
-$headings-font-weight:        500 !default;
+$headings-font-weight:        700 !default;
 $headings-line-height:        1.2 !default;
 $headings-color:              inherit !default;
 // scss-docs-end headings-variables
@@ -1270,7 +1270,8 @@ $nav-underline-link-active-color:   var(--#{$prefix}emphasis-color) !default;
 // Navbar
 
 // scss-docs-start navbar-variables
-$navbar-padding-y:                  $spacer * .5 !default;
+// $navbar-padding-y:                  $spacer * .5 !default;
+$navbar-padding-y:                  $spacer * 1.5 !default;
 $navbar-padding-x:                  null !default;
 
 $navbar-nav-link-padding-x:         .5rem !default;
