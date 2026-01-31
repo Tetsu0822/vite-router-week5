@@ -1,0 +1,23 @@
+.product {
+    &-card {
+        max-width: 384px;
+        max-height: 392px;
+        padding: 16px;
+        border-radius: 16px;
+        background-color: $gray-100;
+        cursor: pointer;
+        transition: transform 0.2s;
+        &:hover {
+            transform: scale(1.05);
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+        .cart-btn {
+            padding: 12px;
+        }
+    }
+}

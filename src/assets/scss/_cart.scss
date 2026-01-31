@@ -1,0 +1,7 @@
+// .cart-card 繼承 bootstrap 的 .card 樣式
+.cart {
+    &-card {
+        border: 1px solid $secondary-100;
+        border-radius: 16px;
+    }
+}

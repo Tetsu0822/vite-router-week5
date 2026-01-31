@@ -35,6 +35,13 @@ $grays: (
 // scss-docs-end gray-colors-map
 // fusv-enable
 
+// 產生 .text-gray-100 ~ .text-gray-900 utility class
+@each $key, $val in $grays {
+  .text-gray-#{$key} {
+    color: #{$val} !important;
+  }
+}
+
 // scss-docs-start color-variables
 $blue:    #0d6efd !default;
 $indigo:  #6610f2 !default;

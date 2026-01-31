@@ -1,19 +1,34 @@
 import useProducts from "../../hooks/useProjects";
-
+import newIcon from "../../assets/new-icon.png";
+import ProductCard from "../../components/ProductCard";
 
 function Home() {
     const { products, loading, error } = useProducts();
 
     return (
         <>
-        <h2>首頁</h2>
-        {loading && <p>載入中...</p>}
-        {error && <p>發生錯誤：{error.message}</p>}
-        {!loading && !error && (<ul>
-            {products.map(product => (
-                <li key={product.id}>{product.title} - ${product.price}</li>
-            ))}
-        </ul>)}
+        <div className="container">
+            <div className="d-flex justify-content-center align-items-center my-5">
+                <img src={newIcon} alt="New Icon" className="me-3" style={{ width: "24px", height: "24px" }} />
+                <h2 className="h4 text-primary-700">新品上架</h2>
+            </div>
+            {loading &&
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">載入中...</span>
+            </div>
+            }
+            {error && <p>發生錯誤：{error.message}</p>}
+            {!loading && !error && (
+                <>
+                <div className="row">
+                    {products.slice(0, 6).map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
+                </div>
+
+            </>
+            )}
+        </div>
         </>
     )
 }

@@ -1,0 +1,95 @@
+import axios from "axios";
+import Swal from "sweetalert2";
+import { ShoppingCart } from "lucide-react";
+const VITE_API_BASE = import.meta.env.VITE_API_BASE;
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
+
+function ProductCard({ product }) {
+    const addCart = async (id) => {
+        const url = `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`;
+        const data = {
+            data: {
+                product_id: id,
+                qty: 1
+            }
+        };
+        try {
+            const response = await axios.post(url, data);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: true,
+                confirmButtonText: '立即查看',
+                timer: 3000,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "商品已加入購物車！"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/#cart`;
+                }
+            });
+        } catch (error) {
+            console.log("Error adding to cart:", error);
+        }
+    };
+
+    return (
+    <>
+    <div key={product.id} className="col-md-4 mb-4">
+        <div
+            key={product.id}
+            className="product-card col-md-4 mb-3 w-100"
+            onClick={() => window.location.href=`/#product/${product.id}`}>
+            <img
+                src={product.imageUrl}
+                alt={product.title}
+            />
+        </div>
+        <div className="d-flex align-items-center">
+            <div className="flex-grow-1 ps-3">
+                <h3 className="text-p-24 text-gray-600 mb-1">{product.title}</h3>
+                <p className="text-p-20-b text-secondary-700">NT${product.price}</p>
+            </div>
+            <div className="cart-btn">
+                <a href="#" onClick={(e) => {
+                    e.preventDefault();
+                    addCart(product.id);
+                }}><ShoppingCart color={"#493B3F"} /></a>
+            </div>
+        </div>
+    </div>
+    </>
+    )
+}
+
+export default ProductCard;
+
+// 建議在全域 SCSS 加入以下自訂樣式來美化 SweetAlert2 彈窗：
+/*
+.swal2-border {
+    border: 1px solid #222;
+    border-radius: 0;
+}
+.swal2-title-custom {
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.swal2-confirm-custom {
+    font-size: 0.95rem;
+    color: #222;
+    background: none;
+    border: none;
+    box-shadow: none;
+    font-weight: 500;
+}
+*/
