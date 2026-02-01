@@ -44,7 +44,9 @@ function ProductCard({ product }) {
     <>
     <div key={product.id} className="col">
         <div className="card product-card border-0 h-100">
-            <img src={product.imageUrl} className="card-img-top product-image-top" alt={product.title} />
+            <div className="product-image">
+                <img src={product.imageUrl} alt={product.title} />
+            </div>
             <div className="card-body">
                 <div className="d-flex align-items-center">
                     <div className="flex-grow-1 ps-3">
