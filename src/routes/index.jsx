@@ -27,6 +27,10 @@ const routes = [
                 element: <Products />
             },
             {
+                path: 'product/:child',
+                element: <Products />
+            },
+            {
                 path: 'product/:id',
                 element: <SingleProduct />
             },
