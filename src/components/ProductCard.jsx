@@ -46,7 +46,7 @@ function ProductCard({ product }) {
         <div
             key={product.id}
             className="card product-card border-0 h-100"
-            onClick={() => window.location.href = `/#product/${product.id}`}
+            onClick={() => window.location.href = `${import.meta.env.BASE_URL}#product/${product.id}`}
         >
             <div className="product-image">
                 <img src={product.imageUrl} alt={product.title} />
