@@ -54,3 +54,24 @@ footer {
         margin-bottom: 8px;
     }
 }
+
+@media (max-width: 575.98px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        .footer__left, .footer__center, .footer__right {
+            align-items: center;
+        }
+        .footer__right ul {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+        .footer__right ul li {
+            padding: 8px 0;
+        }
+    }
+}

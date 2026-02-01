@@ -50,7 +50,7 @@ const FrontendLayout = () => {
                     <img src={logo} alt="Logo" width="36" height="20" className="me-2"/>
                     <span className="h6 mb-0">愛哆啦也愛<span className="copyright text-primary-700">手作</span></span>
                 </a>
-                <p>
+                <p className="d-none d-sm-block">
                     <Copyright className="text-secondary-400 me-1" size={20} />
                     <span className="copyright">Copyright 2025 愛哆啦也愛手作</span>
                 </p>
@@ -65,11 +65,15 @@ const FrontendLayout = () => {
             </div>
             <div className="footer__right">
                 <p className="text-p-24 quick-link">快速連結</p>
-                <ul className="list-unstyled d-flex justify-content-start">
+                <ul className="list-unstyled d-flex justify-content-start mb-4">
                     <li className="text-p-16-b"><Link to="/">常見問題</Link></li>
                     <li className="text-p-16-b"><Link to="/">文章專區</Link></li>
                     <li className="text-p-16-b"><Link to="/">網站地圖</Link></li>
                 </ul>
+                <p className="d-block d-sm-none">
+                    <Copyright className="text-secondary-400 me-1" size={20} />
+                    <span className="copyright">Copyright 2025 愛哆啦也愛手作</span>
+                </p>
             </div>
             {/* <div className="row d-flex justify-content-center">
                 <div className="col d-flex flex-column align-items-start">

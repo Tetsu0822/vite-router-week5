@@ -42,8 +42,12 @@ function ProductCard({ product }) {
 
     return (
     <>
-    <div key={product.id} className="col">
-        <div className="card product-card border-0 h-100">
+    <div className="col">
+        <div
+            key={product.id}
+            className="card product-card border-0 h-100"
+            onClick={() => window.location.href = `/#/product/${product.id}`}
+        >
             <div className="product-image">
                 <img src={product.imageUrl} alt={product.title} />
             </div>
