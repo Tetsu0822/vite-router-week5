@@ -42,26 +42,22 @@ function ProductCard({ product }) {
 
     return (
     <>
-    <div key={product.id} className="col-md-4 mb-4">
-        <div
-            key={product.id}
-            className="product-card col-md-4 mb-3 w-100"
-            onClick={() => window.location.href=`/#product/${product.id}`}>
-            <img
-                src={product.imageUrl}
-                alt={product.title}
-            />
-        </div>
-        <div className="d-flex align-items-center">
-            <div className="flex-grow-1 ps-3">
-                <h3 className="text-p-24 text-gray-600 mb-1">{product.title}</h3>
-                <p className="text-p-20-b text-secondary-700">NT${product.price}</p>
-            </div>
-            <div className="cart-btn">
-                <a href="#" onClick={(e) => {
-                    e.preventDefault();
-                    addCart(product.id);
-                }}><ShoppingCart color={"#493B3F"} /></a>
+    <div key={product.id} className="col">
+        <div className="card product-card border-0 h-100">
+            <img src={product.imageUrl} className="card-img-top product-image-top" alt={product.title} />
+            <div className="card-body">
+                <div className="d-flex align-items-center">
+                    <div className="flex-grow-1 ps-3">
+                        <h3 className="product-title mb-1">{product.title}</h3>
+                        <p className="text-p-20-b text-secondary-700">NT${product.price}</p>
+                    </div>
+                    <div className="product-cart-btn">
+                        <a href="#" onClick={(e) => {
+                            e.preventDefault();
+                            addCart(product.id);
+                        }}><ShoppingCart color={"#493B3F"} /></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

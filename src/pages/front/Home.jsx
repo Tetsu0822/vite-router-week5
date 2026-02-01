@@ -20,7 +20,7 @@ function Home() {
             {error && <p>發生錯誤：{error.message}</p>}
             {!loading && !error && (
                 <>
-                <div className="row">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     {products.slice(0, 6).map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
