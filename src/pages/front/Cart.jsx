@@ -90,7 +90,7 @@ function Cart() {
                         <div className="d-none d-md-block">
                             <div className="card">
                                 <div className="table-responsive">
-                                    <table className="table align-middle mb-0">
+                                    <table className="table table-borderless align-middle mb-0">
                                     <thead>
                                         <tr>
                                         <th style={{background: "#EAE1E3"}} scope="col">商品</th>
