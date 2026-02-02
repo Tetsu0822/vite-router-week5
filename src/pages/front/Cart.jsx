@@ -96,6 +96,7 @@ function Cart() {
                                         <th style={{background: "#EAE1E3"}} scope="col">商品</th>
                                         <th style={{background: "#EAE1E3"}} scope="col">單價</th>
                                         <th style={{background: "#EAE1E3"}} scope="col">數量</th>
+                                        <th style={{background: "#EAE1E3"}} scope="col">單位</th>
                                         <th style={{background: "#EAE1E3"}} scope="col">小計</th>
                                         <th style={{background: "#EAE1E3"}} scope="col">操作</th>
                                         </tr>
@@ -115,6 +116,7 @@ function Cart() {
                                                     <button className="btn btn-outline-secondary btn-sm" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty+1)}>+</button>
                                                 </div>
                                             </td>
+                                            <td className="text-center">{item.product.unit}</td>
                                             <td>${item.total}</td>
                                             <td>
                                                 <button className="btn btn-primary btn-sm text-white me-1" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty)}><RefreshCcw color="white" /> 更新</button>
