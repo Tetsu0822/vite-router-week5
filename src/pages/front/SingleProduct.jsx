@@ -120,8 +120,28 @@ function SingleProduct() {
                             }
                             return (
                                 <>
-                                    <li className="breadcrumb-item"><a href="#">{parentCategory}</a></li>
-                                    <li className="breadcrumb-item"><a href="#">{childCategory}</a></li>
+                                    <li className="breadcrumb-item">
+                                        <a
+                                            href="#"
+                                            onClick={e => {
+                                                e.preventDefault();
+                                                window.location.href = `#/product/category/${parentCategory}`;
+                                            }}
+                                        >
+                                            {parentCategory}
+                                        </a>
+                                    </li>
+                                    <li className="breadcrumb-item">
+                                        <a
+                                            href="#"
+                                            onClick={e => {
+                                                e.preventDefault();
+                                                window.location.href = `#/product/category/${childCategory}`;
+                                            }}
+                                        >
+                                            {childCategory}
+                                        </a>
+                                    </li>
                                 </>
                             );
                         })}
