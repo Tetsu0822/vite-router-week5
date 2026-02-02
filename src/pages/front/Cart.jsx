@@ -9,9 +9,6 @@ function Cart() {
     // 優惠券、運費等狀態可在此新增
     const [ couponCode, setCouponCode ] = useState("");
     const [ couponStatus, setCouponStatus ] = useState("");
-    // 儲存優惠券資訊與折扣金額
-    const [couponInfo, setCouponInfo] = useState(null);
-    const [discountAmount, setDiscountAmount] = useState(0);
     // 折扣後的金額
     const [finalTotal, setFinalTotal] = useState(null);
 
@@ -77,9 +74,8 @@ function Cart() {
     // API 取得購物車資料顯示在此
     useEffect(() => {
         const fetchCartData = async () => {
-            // Fetch cart data from API
             const response = await axios.get(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`);
-            console.log(response.data);
+            //console.log(response.data);
             setCartData(response.data.data.carts);
         }
         fetchCartData();
@@ -204,7 +200,6 @@ function Cart() {
                                 </div>
                             </div>
                         </div>
-                        {/* 立即結帳按鈕不要有圓角 */}
                         <button className="btn btn-primary w-100 text-white" style={{borderRadius: 0, paddingTop: "18px", paddingBottom: "18px"}}>立即結帳</button>
                     </div>
                 </div>

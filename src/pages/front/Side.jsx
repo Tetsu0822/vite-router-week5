@@ -11,14 +11,14 @@ function Side() {
             <NavLink to="/product" className="side-link">
                 全部商品
             </NavLink>
-            {/* 迭代分類與子分類 */}
+            {/* 父分類與子分類 */}
             {Object.entries(category).map(([parent, children]) => (
                 <div key={parent} className="side-category">
                     <div className="side-category-title">{parent}</div>
                     {children.map((child) => (
                         <NavLink
                             key={child}
-                            to={`/product/${child}`}
+                            to={`/product/category/${child}`}
                             className={({ isActive }) =>
                                 isActive ? "side-link active" : "side-link"
                             }

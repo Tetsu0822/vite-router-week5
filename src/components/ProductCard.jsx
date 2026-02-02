@@ -60,6 +60,7 @@ function ProductCard({ product }) {
                     <div className="product-cart-btn">
                         <a href="#" onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             addCart(product.id);
                         }}><ShoppingCart color={"#493B3F"} /></a>
                     </div>

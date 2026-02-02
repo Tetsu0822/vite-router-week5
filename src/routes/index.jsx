@@ -27,12 +27,12 @@ const routes = [
                 element: <Products />
             },
             {
-                path: 'product/:child',
-                element: <Products />
-            },
-            {
                 path: 'product/:id',
                 element: <SingleProduct />
+            },
+            {
+                path: 'product/category/:child',
+                element: <Products />
             },
             {
                 path: 'cart',

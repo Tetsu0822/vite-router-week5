@@ -75,24 +75,6 @@ const FrontendLayout = () => {
                     <span className="copyright">Copyright 2025 愛哆啦也愛手作</span>
                 </p>
             </div>
-            {/* <div className="row d-flex justify-content-center">
-                <div className="col d-flex flex-column align-items-start">
-                    <div className="py-3 mb-3">
-                        <a className="navbar-brand d-flex align-items-center" href="#">
-                            <img src={logo} alt="Logo" width="36" height="20" className="me-2"/>
-                            <span className="h6 mb-0">愛哆啦也愛<span className="text-primary-700">手作</span></span>
-                        </a>
-                    </div>
-                    <div>
-                        <p>
-                            <Copyright className="text-secondary-400 me-1" size={20} />
-                            <span className="copyright">Copyright 2025 愛哆啦也愛手作</span>
-                        </p>
-                    </div>
-                </div>
-                <div className="col"></div>
-                <div className="col"></div>
-            </div> */}
         </footer>
     </>)
 }
