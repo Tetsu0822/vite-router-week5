@@ -1,9 +1,9 @@
-import { useParams } from "react-router";
-import useProducts from "../../hooks/useProjects";
-import { useState } from "react";
-import { ShoppingCart, Minus, Plus, Heart } from "lucide-react";
+import React, { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { ShoppingCart, Minus, Plus, Heart } from "lucide-react";
+import useProducts from "../../hooks/useProjects";
 const VITE_API_BASE = import.meta.env.VITE_API_BASE;
 const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
@@ -12,55 +12,54 @@ function SingleProduct() {
     const { id } = params;
     const { products, loading, error } = useProducts();
     const [qty, setQty] = useState(1);
+    const navigate = useNavigate();
     const category = {
         "成品": ["蝴蝶結"],
         "材料": ["帶子", "夾子", "貼片"],
     };
+    const url = `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`;
+
+    function createToast({ showConfirmButton = false, confirmButtonText = '', icon = 'success', title = '' }) {
+        return Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton,
+            confirmButtonText,
+            timer: 3000,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+            }
+        }).fire({
+            icon,
+            title
+        });
+    }
 
     // 加入購物車功能
     const addToCart = async (productId, qty) => {
         try {
-            await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {
+            await axios.post(url, {
                 data: {
                     product_id: productId,
                     qty: qty
                 }
             });
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
+            createToast({
                 showConfirmButton: true,
                 confirmButtonText: '立即查看',
-                timer: 3000,
-                timerProgressBar: false,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: "success",
-                title: "商品已加入購物車！"
+                icon: 'success',
+                title: '商品已加入購物車！'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `/#cart`;
+                    navigate('/cart');
                 }
             });
         } catch (error) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: false,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: "error",
-                title: "加入購物車失敗！"
+            createToast({
+                icon: 'error',
+                title: '加入購物車失敗！'
             });
         }
     };
@@ -68,31 +67,21 @@ function SingleProduct() {
     // 立即購買
     const buyNow = async (productId, qty) => {
         try {
-            await axios.post(`${VITE_API_BASE}/api/${VITE_API_PATH}/cart`, {
+            await axios.post(url, {
                 data: {
                     product_id: productId,
                     qty: qty
                 }
             });
-            window.location.href = "/cart";
+            navigate('/cart');
         } catch (error) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: false,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: "error",
-                title: "無法立即購買"
+            createToast({
+                icon: 'error',
+                title: '加入購物車失敗！'
             });
         }
     };
+
     return (
         <>
         <div className="container my-5">
@@ -121,26 +110,14 @@ function SingleProduct() {
                             return (
                                 <>
                                     <li className="breadcrumb-item">
-                                        <a
-                                            href="#"
-                                            onClick={e => {
-                                                e.preventDefault();
-                                                window.location.href = `#/product/category/${parentCategory}`;
-                                            }}
-                                        >
+                                        <Link to={`/product/category/${parentCategory}`}>
                                             {parentCategory}
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li className="breadcrumb-item">
-                                        <a
-                                            href="#"
-                                            onClick={e => {
-                                                e.preventDefault();
-                                                window.location.href = `#/product/category/${childCategory}`;
-                                            }}
-                                        >
+                                        <Link to={`/product/category/${childCategory}`}>
                                             {childCategory}
-                                        </a>
+                                        </Link>
                                     </li>
                                 </>
                             );
@@ -217,7 +194,7 @@ function SingleProduct() {
             )}
         </div>
         </>
-    )
+    );
 }
 
 export default SingleProduct;

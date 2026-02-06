@@ -111,7 +111,13 @@ function Cart() {
                                             <td>${item.product.price}</td>
                                             <td>
                                                 <div className="input-group" style={{maxWidth: 120}}>
-                                                    <button className="btn btn-outline-secondary btn-sm" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty-1)}>-</button>
+                                                    <button
+                                                        className={`btn btn-outline-secondary btn-sm${item.qty === 1 ? ' text-muted border-muted' : ''}`}
+                                                        type="button"
+                                                        disabled={item.qty === 1 || updatingId === item.id}
+                                                        style={item.qty === 1 ? { backgroundColor: '#e9ecef', borderColor: '#e9ecef', color: '#adb5bd' } : {}}
+                                                        onClick={() => updateCartQty(item, item.qty - 1)}
+                                                    >-</button>
                                                     <input type="number" min="1" className="form-control form-control-sm text-center" style={{width: 50}} value={item.qty} onChange={e => updateCartQty(item, Number(e.target.value))} disabled={updatingId===item.id} />
                                                     <button className="btn btn-outline-secondary btn-sm" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty+1)}>+</button>
                                                 </div>
@@ -119,7 +125,7 @@ function Cart() {
                                             <td className="text-center">{item.product.unit}</td>
                                             <td>${item.total}</td>
                                             <td>
-                                                <button className="btn btn-primary btn-sm text-white me-1" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty)}><RefreshCcw color="white" /> 更新</button>
+                                                {/* <button className="btn btn-primary btn-sm text-white me-1" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty)}><RefreshCcw color="white" /> 更新</button> */}
                                                 <button className="btn btn-danger btn-sm text-white" disabled={updatingId===item.id} onClick={() => removeCartItem(item.id)}><Trash2 color="white" /> 刪除</button>
                                             </td>
                                         </tr>
@@ -138,13 +144,17 @@ function Cart() {
                                     <div style={{flex:1}}>
                                         <div className="fw-bold" style={{fontSize: "1.1rem"}}>{item.product.title}</div>
                                         <div className="text-secondary" style={{fontSize: "0.95rem"}}>
-                                            單價 ${item.product.price} /
-                                            <span className="mx-1">數量</span>
-                                            <button className="btn btn-outline-secondary btn-sm px-2 py-0" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty-1)}>-</button>
-                                            <input type="number" min="1" className="form-control form-control-sm d-inline-block text-center mx-1" style={{width: 50, height: 28}} value={item.qty} onChange={e => updateCartQty(item, Number(e.target.value))} disabled={updatingId===item.id} />
-                                            <button className="btn btn-outline-secondary btn-sm px-2 py-0" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty+1)}>+</button>
-                                            <button className="btn btn-primary btn-sm ms-2" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty)}><RefreshCcw color="white" /></button>
-                                            <button className="btn btn-danger btn-sm ms-1" disabled={updatingId===item.id} onClick={() => removeCartItem(item.id)}><Trash2 color="white" /></button>
+                                            單價 ${item.product.price}
+                                            <div>
+                                                <span className="mx-1">數量</span>
+                                                <button className="btn btn-outline-secondary btn-sm px-2 py-0" type="button" disabled={item.qty ===1 || updatingId===item.id}
+                                                style={item.qty === 1 ? { backgroundColor: '#e9ecef', borderColor: '#e9ecef', color: '#adb5bd' } : {}}
+                                                onClick={() => updateCartQty(item, item.qty-1)}>-</button>
+                                                <input type="number" min="1" className="form-control form-control-sm d-inline-block text-center mx-1" style={{width: 50, height: 28}} value={item.qty} onChange={e => updateCartQty(item, Number(e.target.value))} disabled={updatingId===item.id} />
+                                                <button className="btn btn-outline-secondary btn-sm px-2 py-0" type="button" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty+1)}>+</button>
+                                                {/* <button className="btn btn-primary btn-sm ms-2" disabled={updatingId===item.id} onClick={() => updateCartQty(item, item.qty)}><RefreshCcw color="white" /></button> */}
+                                                <button className="btn btn-danger btn-sm ms-1" disabled={updatingId===item.id} onClick={() => removeCartItem(item.id)}><Trash2 color="white" /></button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="fw-bold" style={{fontSize: "1.1rem"}}>${item.total}</div>

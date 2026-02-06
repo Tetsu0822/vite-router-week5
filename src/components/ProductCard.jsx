@@ -1,10 +1,12 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ShoppingCart } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
 const VITE_API_BASE = import.meta.env.VITE_API_BASE;
 const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 function ProductCard({ product }) {
+    const navigate = useNavigate();
     const addCart = async (id) => {
         const url = `${VITE_API_BASE}/api/${VITE_API_PATH}/cart`;
         const data = {
@@ -32,7 +34,7 @@ function ProductCard({ product }) {
                 title: "商品已加入購物車！"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = `/#cart`;
+                    navigate('/cart');
                 }
             });
         } catch (error) {
@@ -41,35 +43,33 @@ function ProductCard({ product }) {
     };
 
     return (
-    <>
-    <div className="col">
-        <div
-            key={product.id}
-            className="card product-card border-0 h-100"
-            onClick={() => window.location.href = `${import.meta.env.BASE_URL}#product/${product.id}`}
-        >
-            <div className="product-image">
-                <img src={product.imageUrl} alt={product.title} />
-            </div>
-            <div className="card-body">
-                <div className="d-flex align-items-center">
-                    <div className="flex-grow-1 ps-3">
-                        <h3 className="product-title mb-1">{product.title}</h3>
-                        <p className="text-p-20-b text-secondary-700">NT${product.price}</p>
-                    </div>
-                    <div className="product-cart-btn">
-                        <a href="#" onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            addCart(product.id);
-                        }}><ShoppingCart color={"#493B3F"} /></a>
+        <div className="col">
+            <Link
+                to={`/product/${product.id}`}
+                className="card product-card border-0 h-100"
+                style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+                <div className="product-image">
+                    <img src={product.imageUrl} alt={product.title} />
+                </div>
+                <div className="card-body">
+                    <div className="d-flex align-items-center">
+                        <div className="flex-grow-1 ps-3">
+                            <h3 className="product-title mb-1">{product.title}</h3>
+                            <p className="text-p-20-b text-secondary-700">NT${product.price}</p>
+                        </div>
+                        <div className="product-cart-btn">
+                            <a href="#" onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                addCart(product.id);
+                            }}><ShoppingCart color={"#493B3F"} /></a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         </div>
-    </div>
-    </>
-    )
+    );
 }
 
 export default ProductCard;
